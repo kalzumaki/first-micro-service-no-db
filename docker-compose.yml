@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   laravel-user-services:
     build: ./todo-list-app-laravel
@@ -19,6 +17,14 @@ services:
     depends_on:
       - laravel-user-services
 
+
+  todo-list-front:
+      build: ./todo-list-front
+      image: todo-list-frontend:latest
+      container_name: todo-list-frontend
+      ports: 
+      - 3000:3000
 networks:
   first-microservice-network:
     driver: bridge
+  

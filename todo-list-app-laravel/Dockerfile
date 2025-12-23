@@ -2,12 +2,16 @@ FROM php:8.3-cli
 
 WORKDIR /var/www
 
-COPY . .
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    zip
 
-# Install Composer globally
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install Laravel dependencies (ignore dev dependencies if you want, but for dev usually include them)
+COPY . .
+
 RUN composer install
 
 EXPOSE 8000
